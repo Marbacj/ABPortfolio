@@ -3,7 +3,7 @@ name = "abportfolio-backend"
 version = "0.1.0"
 description = "永久投资组合后端服务"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dependencies = [
     "fastapi>=0.109.0",
     "uvicorn[standard]>=0.27.0",
@@ -29,8 +29,12 @@ dev = [
 ]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
 
 [tool.ruff]
 line-length = 88
@@ -39,3 +43,4 @@ target-version = "py310"
 [tool.black]
 line-length = 88
 target-version = ["py310"]
+
