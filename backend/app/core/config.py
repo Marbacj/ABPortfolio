@@ -28,17 +28,17 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
     ]
 
-    # 永久投资组合配置
+    # 永久投资组合配置（中国版默认组合）
     PORTFOLIO_ASSETS: dict = {
-        "SPY": {"name": "SPDR S&P 500 ETF", "category": "股票", "target_weight": 0.25},
-        "TLT": {
-            "name": "iShares 20+ Year Treasury Bond ETF",
+        "510300.SS": {"name": "沪深300ETF", "category": "股票", "target_weight": 0.25},
+        "511010.SS": {
+            "name": "国债ETF",
             "category": "长期国债",
             "target_weight": 0.25,
         },
-        "GLD": {"name": "SPDR Gold Shares", "category": "黄金", "target_weight": 0.25},
-        "SHV": {
-            "name": "iShares Short Treasury Bond ETF",
+        "518880.SS": {"name": "黄金ETF", "category": "黄金", "target_weight": 0.25},
+        "511990.SS": {
+            "name": "货币ETF",
             "category": "现金等价物",
             "target_weight": 0.25,
         },

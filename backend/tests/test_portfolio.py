@@ -59,7 +59,7 @@ def test_portfolio_weights():
     """测试组合权重验证"""
     # 永久投资组合各资产权重
     weights = {
-        'SPY': 0.25,
+        '510300.SS': 0.25,
         'TLT': 0.25,
         'GLD': 0.25,
         'SHV': 0.25,
@@ -76,7 +76,7 @@ def test_rebalance_threshold():
     
     # 当前权重
     current_weights = {
-        'SPY': 0.30,  # 偏离 +5%
+        '510300.SS': 0.30,  # 偏离 +5%
         'TLT': 0.22,  # 偏离 -3%
         'GLD': 0.23,  # 偏离 -2%
         'SHV': 0.25,  # 偏离 0%
@@ -90,7 +90,7 @@ def test_rebalance_threshold():
             needs_rebalance = True
             break
     
-    assert needs_rebalance is True  # SPY 偏离超过阈值
+    assert needs_rebalance is True  # 510300.SS 偏离超过阈值
 
 
 if __name__ == '__main__':

@@ -68,7 +68,11 @@ export function getAssetColor(category: string): string {
  */
 export function getSymbolColor(symbol: string): string {
   const colorMap: Record<string, string> = {
-    'SPY': '#3b82f6',
+    '510300.SS': '#3b82f6',
+    '511010.SS': '#10b981',
+    '518880.SS': '#f59e0b',
+    '511990.SS': '#6b7280',
+    'VOO': '#3b82f6',
     'TLT': '#10b981',
     'GLD': '#f59e0b',
     'SHV': '#6b7280',

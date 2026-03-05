@@ -7,19 +7,20 @@ from datetime import date, timedelta
 
 from app.schemas.market import QuoteResponse, HistoricalData
 from app.services.market_service import MarketDataService
+from app.core.config import settings
 
 router = APIRouter()
 market_service = MarketDataService()
 
-# 永久投资组合默认资产
-DEFAULT_SYMBOLS = ["SPY", "TLT", "GLD", "SHV"]
+# 永久投资组合默认资产（从配置中读取）
+DEFAULT_SYMBOLS = list(settings.PORTFOLIO_ASSETS.keys())
 
 
 @router.get("/quote", response_model=List[QuoteResponse])
 async def get_quotes(
     symbols: Optional[str] = Query(
         default=None,
-        description="股票代码，逗号分隔，如 SPY,TLT,GLD,SHV。不传则返回默认组合",
+        description="股票代码，逗号分隔，如 510300.SS,511010.SS,518880.SS,511990.SS。不传则返回默认组合",
     ),
 ):
     """

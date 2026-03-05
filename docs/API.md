@@ -98,8 +98,8 @@ GET /api/portfolio/allocation
   "total_value": 100000.00,
   "assets": [
     {
-      "symbol": "SPY",
-      "name": "SPDR S&P 500 ETF",
+      "symbol": "510300.SS",
+      "name": "沪深300ETF",
       "category": "股票",
       "current_weight": 0.2523,
       "target_weight": 0.25,
@@ -152,14 +152,14 @@ GET /api/portfolio/rebalance
   "threshold": 0.05,
   "actions": [
     {
-      "symbol": "SPY",
+      "symbol": "510300.SS",
       "action": "sell",
       "current_weight": 0.30,
       "target_weight": 0.25,
       "adjustment_pct": 5.0
     },
     {
-      "symbol": "TLT",
+      "symbol": "511010.SS",
       "action": "buy",
       "current_weight": 0.20,
       "target_weight": 0.25,
@@ -199,15 +199,15 @@ GET /api/market/quote
 
 | 参数 | 类型 | 必填 | 说明 |
 |-----|------|-----|------|
-| symbols | string | 否 | 资产代码，逗号分隔，如 SPY,TLT,GLD,SHV。不传返回默认组合 |
+| symbols | string | 否 | 资产代码，逗号分隔，如 510300.SS,511010.SS,518880.SS,511990.SS。不传返回默认组合 |
 
 **响应**
 
 ```json
 [
   {
-    "symbol": "SPY",
-    "name": "SPDR S&P 500 ETF",
+    "symbol": "510300.SS",
+    "name": "沪深300ETF",
     "price": 478.52,
     "change": 2.35,
     "change_percent": 0.49,
@@ -244,7 +244,7 @@ GET /api/market/history
 {
   "symbols": [
     {
-      "symbol": "SPY",
+      "symbol": "510300.SS",
       "data": [
         {
           "date": "2024-01-02",
