@@ -1,15 +1,16 @@
 'use client'
 
-import { TrendingUp, TrendingDown } from 'lucide-react'
+import { TrendingUp, TrendingDown, DollarSign } from 'lucide-react'
 import { cn, formatCurrency, formatPercent, formatCompactNumber, getSymbolColor } from '@/lib/utils'
 import type { QuoteData } from '@/types'
 
 interface QuoteTableProps {
   quotes: QuoteData[]
   loading: boolean
+  onTrade: (quote: QuoteData) => void
 }
 
-export function QuoteTable({ quotes, loading }: QuoteTableProps) {
+export function QuoteTable({ quotes, loading, onTrade }: QuoteTableProps) {
   return (
     <div className="glass rounded-2xl p-6 card-hover">
       <h3 className="text-lg font-semibold text-slate-200 mb-4">实时行情</h3>
@@ -43,6 +44,9 @@ export function QuoteTable({ quotes, loading }: QuoteTableProps) {
                 </th>
                 <th className="text-right py-3 px-2 text-sm font-medium text-slate-400 hidden md:table-cell">
                   市值
+                </th>
+                <th className="text-right py-3 px-2 text-sm font-medium text-slate-400">
+                  操作
                 </th>
               </tr>
             </thead>
@@ -116,6 +120,17 @@ export function QuoteTable({ quotes, loading }: QuoteTableProps) {
                           ? `$${formatCompactNumber(quote.market_cap)}`
                           : '--'}
                       </span>
+                    </td>
+
+                    {/* 操作 */}
+                    <td className="py-4 px-2 text-right">
+                      <button
+                        onClick={() => onTrade(quote)}
+                        className="p-2 bg-brand-600/20 hover:bg-brand-600 hover:text-white text-brand-400 rounded-lg transition-all"
+                        title="交易"
+                      >
+                        <DollarSign className="w-4 h-4" />
+                      </button>
                     </td>
                   </tr>
                 )

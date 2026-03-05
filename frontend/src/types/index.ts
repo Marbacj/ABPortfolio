@@ -65,3 +65,39 @@ export interface BrokerInfo {
   url: string
   region: string
 }
+
+// User Portfolio Types
+export interface Transaction {
+  id: number
+  symbol: string
+  type: 'BUY' | 'SELL'
+  quantity: number
+  price: number
+  amount: number
+  timestamp: string
+}
+
+export interface Holding {
+  symbol: string
+  quantity: number
+  average_cost: number
+  current_price: number
+  market_value: number
+  return_amount: number
+  return_percent: number
+}
+
+export interface UserPortfolioSummary {
+  total_market_value: number
+  total_cost: number
+  total_return: number
+  total_return_percent: number
+  holdings: Holding[]
+}
+
+export interface TransactionCreate {
+  symbol: string
+  type: 'BUY' | 'SELL'
+  quantity: number
+  price: number
+}

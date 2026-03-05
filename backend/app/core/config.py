@@ -16,10 +16,10 @@ class Settings(BaseSettings):
     PORT: int = 8000
 
     # 数据库配置
-    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/abportfolio"
+    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@127.0.0.1:5432/abportfolio"
 
     # Redis配置
-    REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_URL: str = "redis://127.0.0.1:6379/0"
     CACHE_TTL: int = 300  # 缓存过期时间（秒）
 
     # CORS配置

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Header } from '@/components/Header'
 import { PerformanceCard } from '@/components/PerformanceCard'
 import { AllocationChart } from '@/components/AllocationChart'
@@ -8,10 +8,34 @@ import { NavChart } from '@/components/NavChart'
 import { QuoteTable } from '@/components/QuoteTable'
 import { RebalanceCard } from '@/components/RebalanceCard'
 import { BrokerLinks } from '@/components/BrokerLinks'
+import { HoldingsCard } from '@/components/HoldingsCard'
+import { TradeModal } from '@/components/TradeModal'
 import { usePortfolioData } from '@/hooks/usePortfolioData'
+import type { QuoteData } from '@/types'
 
 export default function Home() {
-  const { performance, allocation, quotes, rebalance, loading, error, refresh } = usePortfolioData()
+  const {
+    performance,
+    allocation,
+    quotes,
+    rebalance,
+    userSummary,
+    loading,
+    error,
+    refresh,
+  } = usePortfolioData()
+
+  const [selectedQuote, setSelectedQuote] = useState<QuoteData | null>(null)
+  const [isTradeModalOpen, setIsTradeModalOpen] = useState(false)
+
+  const handleTrade = (quote: QuoteData) => {
+    setSelectedQuote(quote)
+    setIsTradeModalOpen(true)
+  }
+
+  const handleTradeSuccess = () => {
+    refresh()
+  }
 
   if (error) {
     return (
@@ -53,10 +77,18 @@ export default function Home() {
           </section>
         </div>
 
-        {/* 实时行情 */}
-        <section className="mb-8 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <QuoteTable quotes={quotes} loading={loading} />
-        </section>
+        {/* 个人资产与实时行情 */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* 个人持仓 */}
+          <section className="lg:col-span-1 animate-slide-up" style={{ animationDelay: '0.25s' }}>
+            <HoldingsCard summary={userSummary} loading={loading} />
+          </section>
+          
+          {/* 实时行情 */}
+          <section className="lg:col-span-2 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <QuoteTable quotes={quotes} loading={loading} onTrade={handleTrade} />
+          </section>
+        </div>
 
         {/* 底部区域 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -71,6 +103,16 @@ export default function Home() {
           </section>
         </div>
       </div>
+
+      {/* 交易弹窗 */}
+      {selectedQuote && (
+        <TradeModal
+          isOpen={isTradeModalOpen}
+          onClose={() => setIsTradeModalOpen(false)}
+          onSuccess={handleTradeSuccess}
+          quote={selectedQuote}
+        />
+      )}
 
       {/* 页脚 */}
       <footer className="border-t border-slate-800 mt-16 py-8">

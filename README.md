@@ -38,9 +38,7 @@
 - **图标**: Lucide React
 
 ### 部署
-- Docker & Docker Compose
-- PostgreSQL (可选，用于持久化)
-- Redis (可选，用于缓存)
+- 本地开发运行（后端 + 前端）
 
 ## 快速开始
 
@@ -86,13 +84,6 @@ npm run dev
 
 前端应用将运行在 http://localhost:3000
 
-### Docker 一键启动
-
-```bash
-cd deploy
-docker-compose up -d
-```
-
 ## 项目结构
 
 ```
@@ -118,7 +109,6 @@ ABPortfolio/
 │   ├── package.json
 │   └── tsconfig.json
 ├── docs/                   # 项目文档
-├── deploy/                 # 部署配置
 └── README.md
 ```
 

@@ -5,7 +5,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.api.routes import portfolio, market
+from app.core.database import engine, Base
+from app.api.routes import portfolio, market, user
+
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
 
 app = FastAPI(
     title="永久投资组合 API",
@@ -13,7 +22,14 @@ app = FastAPI(
     version="0.1.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
+
+# 移除旧的 startup 事件处理器
+# @app.on_event("startup")
+# async def startup():
+#     async with engine.begin() as conn:
+#         await conn.run_sync(Base.metadata.create_all)
 
 # CORS 配置
 app.add_middleware(
@@ -27,6 +43,7 @@ app.add_middleware(
 # 注册路由
 app.include_router(portfolio.router, prefix="/api/portfolio", tags=["Portfolio"])
 app.include_router(market.router, prefix="/api/market", tags=["Market"])
+app.include_router(user.router, prefix="/api/user", tags=["User"])
 
 
 @app.get("/health")
